@@ -1,10 +1,11 @@
 import express from 'express';
+
 import '../mongoose';
+import appRoutes from './routes';
 
 const app = express();
 
 app.use(express.json());
-
-app.get('/', (_req, res) => res.json({ message: 'Success!' }));
+app.use(appRoutes);
 
 export default app;
