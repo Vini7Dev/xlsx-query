@@ -1,8 +1,9 @@
 import ICreateUserDTO from '../dto/ICreateUserDTO';
-import User from '../infra/mongoose/models/User';
+import { IUser } from '../infra/mongoose/models/User';
 
 interface IUsersRepository {
-  create(data: ICreateUserDTO): Promise<typeof User>;
+  findByEmail(email: string): Promise<IUser | null>
+  create(data: ICreateUserDTO): Promise<IUser>;
 }
 
 export default IUsersRepository;
