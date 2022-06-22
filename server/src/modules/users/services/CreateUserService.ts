@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 
 import IUsersRepository from '../repositories/IUsersRepository';
 import ICreateUserDTO from '../dto/ICreateUserDTO';
-import User from '../infra/mongoose/models/User';
+import { IUser } from '../infra/mongoose/models/User';
 
 @injectable()
 class CreateUserService {
@@ -11,8 +11,16 @@ class CreateUserService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute(data: ICreateUserDTO): Promise<typeof User> {
-    throw new Error('Not implemented');
+  public async execute({ name, email, password }: ICreateUserDTO): Promise<IUser> {
+    const userWithSameEmail = await this.usersRepository.findByEmail(email);
+
+    if (userWithSameEmail) {
+      throw new Error('This email already exists.');
+    }
+
+    const createdUser = await this.usersRepository.create({ name, email, password });
+
+    return createdUser;
   }
 }
 
