@@ -1,5 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
+import AppError from '@shared/errors/AppError';
 import IUsersRepository from '../repositories/IUsersRepository';
 import ICreateUserDTO from '../dto/ICreateUserDTO';
 import { IUser } from '../infra/mongoose/models/User';
@@ -15,7 +16,7 @@ class CreateUserService {
     const userWithSameEmail = await this.usersRepository.findByEmail(email);
 
     if (userWithSameEmail) {
-      throw new Error('This email already exists.');
+      throw new AppError('This email already exists.');
     }
 
     const createdUser = await this.usersRepository.create({ name, email, password });

@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import AppError from '@shared/errors/AppError';
 import UsersRepositoryInMemory from '../repositories/in-memory/UsersRepositoryInMemory';
 import IUsersRepository from '../repositories/IUsersRepository';
 import CreateUserService from './CreateUserService';
@@ -40,6 +41,8 @@ describe('CreateUserService', () => {
     };
 
     // eslint-disable-next-line no-unused-expressions
-    await expect(createUserService.execute(newUser)).rejects;
+    await expect(createUserService.execute(newUser))
+      .rejects
+      .toEqual(new AppError('This email already exists.'));
   });
 });
