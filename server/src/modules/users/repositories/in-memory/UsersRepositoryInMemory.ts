@@ -23,7 +23,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
 
   public async create({ name, email, password }: ICreateUserDTO): Promise<IUser> {
     const createdUser = {
-      _id: '',
+      _id: this.users.length.toString(),
       name,
       email,
       password,
