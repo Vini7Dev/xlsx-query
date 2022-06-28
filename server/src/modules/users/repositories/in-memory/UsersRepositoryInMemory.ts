@@ -11,6 +11,10 @@ class UsersRepositoryInMemory implements IUsersRepository {
     return findedUser;
   }
 
+  public async list(): Promise<IUser[]> {
+    return this.users;
+  }
+
   public async create({ name, email, password }: ICreateUserDTO): Promise<IUser> {
     const createdUser = {
       _id: '',
