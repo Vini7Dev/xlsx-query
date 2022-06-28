@@ -5,6 +5,12 @@ import IUsersRepository from '../IUsersRepository';
 class UsersRepositoryInMemory implements IUsersRepository {
   private users: IUser[] = [];
 
+  public async findById(id: string): Promise<IUser | null> {
+    const findedUser = this.users.find((user) => user.id === id);
+
+    return findedUser || null;
+  }
+
   public async findByEmail(email: string): Promise<IUser | null> {
     const findedUser = this.users.find((user) => user.email === email) || null;
 
@@ -27,6 +33,14 @@ class UsersRepositoryInMemory implements IUsersRepository {
     this.users.push(createdUser);
 
     return createdUser;
+  }
+
+  public async delete(id: string): Promise<null> {
+    const userIndex = this.users.findIndex((user) => user.id === id);
+
+    this.users.splice(userIndex, 1);
+
+    return null;
   }
 }
 
