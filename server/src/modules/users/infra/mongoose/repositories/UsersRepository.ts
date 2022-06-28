@@ -3,6 +3,12 @@ import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import User, { IUser } from '../models/User';
 
 class UsersRepository implements IUsersRepository {
+  public async findById(id: string): Promise<IUser | null> {
+    const findedUser = await User.findOne({ id });
+
+    return findedUser;
+  }
+
   public async findByEmail(email: string): Promise<IUser | null> {
     const findedUser = await User.findOne({ email });
 
@@ -23,6 +29,10 @@ class UsersRepository implements IUsersRepository {
     });
 
     return createdUser;
+  }
+
+  public async delete(id: string): Promise<void> {
+    await User.deleteOne({ id });
   }
 }
 

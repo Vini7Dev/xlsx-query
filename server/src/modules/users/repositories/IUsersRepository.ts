@@ -6,7 +6,7 @@ interface IUsersRepository {
   findByEmail(email: string): Promise<IUser | null>;
   list(): Promise<IUser[]>;
   create(data: ICreateUserDTO): Promise<IUser>;
-  delete(id: string): Promise<null>;
+  delete(id: string): Promise<void>;
 }
 
 export default IUsersRepository;

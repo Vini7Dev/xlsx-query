@@ -21,7 +21,7 @@ describe('DeleteUserService', () => {
       password: 'example123',
     });
 
-    await expect(deleteUserService.execute(userToDelete.id)).toBeNull();
+    await deleteUserService.execute(userToDelete.id);
 
     const tryFindUser = await usersRepository.findById(userToDelete.id);
 
