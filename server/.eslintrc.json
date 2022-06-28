@@ -25,7 +25,8 @@
     ],
     "no-console": "off",
     "class-methods-use-this": "off",
-    "no-useless-constructor": "off"
+    "no-useless-constructor": "off",
+    "camelcase": "off"
   },
   "settings": {
     "import/resolver": {

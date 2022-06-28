@@ -10,7 +10,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   public async findByEmail(email: string): Promise<IUser | null> {
-    const findedUser = await User.findOne({ email });
+    const findedUser = await User.findOne({ email }).select('+password');
 
     return findedUser;
   }
